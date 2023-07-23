@@ -2,7 +2,7 @@
 PHP Class for Display date in Georgian
 
 Usage
-```
+```php
 require_once 'classes/DisplayGeoDate.php';
 
 
