@@ -2,7 +2,7 @@
 PHP Class for Display date in Georgian
 
 Usage
-```
+```php
 require_once 'classes/DisplayGeoDate.php';
 
 
@@ -25,4 +25,8 @@ echo $output4->convert();
 $output5 = new DisplayGeoDate('2020-01-01','YDMF');
 echo $output5->convert();
 // 2020 წლის 01 იანვრიდან
+
+$output6 = new DisplayGeoDate('2020-01-01','YDME');
+echo $output6->convert();
+// 2020 წლის 01 იანვრამდე
 ```
