@@ -1,20 +1,24 @@
 <?php
-/*
+/**
+ * 
+ *  |   \(_)____ __| |__ _ _  _ / __|___ ___|   \ __ _| |_ ___ 
+ *  | |) | (_-< '_ \ / _` | || | (_ / -_) _ \ |) / _` |  _/ -_)
+ *  |___/|_/__/ .__/_\__,_|\_, |\___\___\___/___/\__,_|\__\___|
+ *            |_|          |__/                                
+ * 
+ *  File: DisplayGeoDate.php
+ *  Author: Kakhaber Mekvabishvili
+ *  Description: Display date in Georgian
+ * 
+ */
 
-  ___  _         _            ___         ___       _       
- |   \(_)____ __| |__ _ _  _ / __|___ ___|   \ __ _| |_ ___ 
- | |) | (_-< '_ \ / _` | || | (_ / -_) _ \ |) / _` |  _/ -_)
- |___/|_/__/ .__/_\__,_|\_, |\___\___\___/___/\__,_|\__\___|
-           |_|          |__/                                
 
-File: DisplayGeoDate.php
-Author: Kakhaber Mekvabishvili
-Description: Display date in Georgian
-
-*/
 
 class DisplayGeoDate {
 
+    /**
+     * Constants for months in Georgian with various formats.
+     */
     const MONTHS = array(
         'DMY' => array('','იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'),
         'YDM' => array('','იანვარი','თებერვალი','მარტი','აპრილი','მაისი','ივნისი','ივლისი','აგვისტო','სექტემბერი','ოქტომბერი','ნოემბერი','დეკემბერი'),
@@ -24,26 +28,38 @@ class DisplayGeoDate {
         'YDME' => array('','იანვრამდე','თებერვლამდე','მარტამდე','აპრილამდე','მაისამდე','ივნისამდე','ივლისამდე','აგვისტომდე','სექტემბრამდე','ოქტომბრამდე','ნოემბრამდე','დეკემბრამდე'),
     );
 
+    /**
+     * @var string
+     */
     private $date;
     private $format;
 
+    /**
+     * Class construct
+     * 
+     * @param string $date The date string in Y-m-d format.
+     * @param string $format The format key for converting the date.
+     */
     public function __construct(string $date, string $format) 
     {
 
         $this->date = $date;
         $this->format = $format;
        
-        // Check Date and output Format
-        $this->checkDate();
-        $this->checkFormat();
+        // Validate the date and format upon object creation.
+
+        $this->ValidateDate();
+        $this->validateFormat();
 
     }
 
-    //
-    // Check format
-    //
-
-    private function checkFormat()
+    /**
+     * Validate date format
+     * 
+     * @return void
+     * @throws Exception if the format is not valid.
+     */
+    private function validateFormat()
     {
         
         if(!array_key_exists($this->format, self::MONTHS))
@@ -53,11 +69,14 @@ class DisplayGeoDate {
         
     }
 
-    //
-    // check Date string
-    //
 
-    private function checkDate()
+    /**
+     * Validate format string
+     * 
+     * @return void
+     * @throws Exception if the date is not in the correct format.
+     */
+    private function ValidateDate()
     {
         if(!preg_match('/^(\d{4})-(\d{2})-(\d{2})$/', $this->date))
         {
@@ -66,14 +85,16 @@ class DisplayGeoDate {
     }
 
 
-    //
-    // Convert into Georgian
-    //
-
+    /**
+     * Converts the date into a Georgian formatted string.
+     * 
+     * @return string The converted date string in Georgian.
+     */
     public function convert()
     {
         
-        // Get year,month and day from Date string
+        // Extract year, month, and day from the date string.
+
         $year = date("Y",strtotime($this->date));
         $month = ceil(date("m",strtotime($this->date)));
         $day = date("d",strtotime($this->date));
@@ -82,10 +103,8 @@ class DisplayGeoDate {
         {
             return $day . ' ' . self::MONTHS[$this->format][$month] . ', ' . $year.' წ.';
         }
-        else
-        {
-            return $year . ' წლის ' . $day . ' '. self::MONTHS[$this->format][$month];
-        }
+        
+        return $year . ' წლის ' . $day . ' '. self::MONTHS[$this->format][$month];
         
     }
 

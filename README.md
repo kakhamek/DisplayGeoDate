@@ -1,7 +1,16 @@
 # DisplayGeoDate
-PHP Class for Display date in Georgian
+A PHP class for displaying dates in Georgian with various formats.
 
-Usage
+### Available Formats
+
+- DMY: Day Month Year (e.g., 01 იანვარი, 2020 წ)
+- YDM: Year Day Month (e.g., 2020 წლის 01 იანვარი)
+- YDMS: Year Day Month (Suffix 'ს') (e.g., 2020 წლის 01 იანვარს)
+- YDMI: Year Day Month (Possessive 'ის') (e.g., 2020 წლის 01 იანვრის)
+- YDMF: Year Day Month (From 'დან') (e.g., 2020 წლის 01 იანვრიდან)
+- YDME: Year Day Month (Until 'მდე') (e.g., 2020 წლის 01 იანვრამდე)
+
+### Usage
 ```php
 require_once 'classes/DisplayGeoDate.php';
 
